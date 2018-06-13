@@ -15,14 +15,17 @@ class Sql {
     const DBNAME = 'sistema';
 
     private $conn;
-
+    
     public function __construct($dsn=null)
     {
         if(is_null($dsn)):
-           $dsn = "mysql:dbname=" . Sql::DBNAME . ";host=". Sql::HOSTNAME .','. Sql::USERNAME . ',' . Sql::PASSWORD;
-            
-        endif;    
-        $this->conn = new \PDO($dsn);
+            $this->conn = new \PDO("mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME, 
+            Sql::USERNAME,
+            Sql::PASSWORD);
+        else:
+            $this->conn = new \PDO($dsn);
+        endif; 
+
     }
 
     private function setParams($statement, $parameters=array())
