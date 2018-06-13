@@ -1,0 +1,16 @@
+{
+    "name": "blackbeard/bbase",
+    "version": "1.0.3",
+    "license":"MIT",
+    "authors": [
+        {
+            "name": "BlackBeard",
+            "email": "carvalho.ti.adm@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bbase\\": "core"
+        }
+    }
+}
