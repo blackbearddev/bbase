@@ -11,7 +11,7 @@ class Sql {
 
     const HOSTNAME = '127.0.0.1';
     const USERNAME = 'root';
-    const PASSWORD = '';
+    const PASSWORD = 'taty1988';
     const DBNAME = 'sistema';
 
     private $conn;
@@ -19,7 +19,7 @@ class Sql {
     public function __construct($dsn=null)
     {
         if(is_null($dsn)):
-            $this->conn = new \PDO("mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME, 
+            $this->conn = new \PDO("mysql:dbname=".Sql::DBNAME.";host=".Sql::HOSTNAME,
             Sql::USERNAME,
             Sql::PASSWORD);
         else:

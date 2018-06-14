@@ -2,6 +2,7 @@
 namespace Bbase\Model;
 
 use \Bbase\DB\Sql;
+use \Bbase\DB\Pg;
 use \Bbase\Model;
 
 class User extends Model
@@ -55,6 +56,56 @@ class User extends Model
     public static function listAll()
     {
         $sql = new Sql();
-        return $sql->select("select * from users order by login");
+        return $sql->select("select * from mt_users a inner join mt_persons b using(idperson) order by b.mtperson");
+    }
+
+    public function save()
+    {
+        $sql = new Sql();
+        $results = $sql->select("CALL sp_users_save(:mtperson, :mtlogin, :mtpassword, :mtemail, :nrphone, :mtisadmin)", array(
+               ":mtperson" => $this->getmtperson(),
+               ":mtlogin" => $this->getmtlogin(),
+               ":mtpassword" => $this->getmtpassword(),
+               ":mtemail" => $this->getmtemail(),
+               ":nrphone" => $this->getnrphone(),
+               ":mtisadmin" =>  $this->getmtisadmin()
+        ));
+
+        $this->setData($results[0]);
+
+    }
+
+    public function get($iduser)
+    {
+        $sql = new Sql();
+        $results = $sql->select("select * from  mt_users a inner join mt_persons b using(idperson) where a.iduser = :iduser", array(
+                ":iduser"=> $iduser
+        ));
+
+        $this->setData($results[0]);
+    }
+
+    public function update()
+    {
+         $sql = new Sql();
+        $results = $sql->select("CALL sp_usersupdate_save(:iduser, :mtperson, :mtlogin, :mtpassword, :mtemail, :nrphone, :mtisadmin)", array(
+               ":iduser" => $this->getiduser(),
+               ":mtperson" => $this->getmtperson(),
+               ":mtlogin" => $this->getmtlogin(),
+               ":mtpassword" => $this->getmtpassword(),
+               ":mtemail" => $this->getmtemail(),
+               ":nrphone" => $this->getnrphone(),
+               ":mtisadmin" =>  $this->getmtisadmin()
+        ));
+
+        $this->setData($results[0]);
+    }
+
+    public function delete()
+    {
+        $sql = new Sql();
+        $sql->query("CALL sp_users_delete(:iduser)", array(
+            ":iduser" => $this->getiduser()
+        ));
     }
 }
