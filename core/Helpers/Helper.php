@@ -90,15 +90,12 @@
 			return $str;
 		}
 
-		public static function getRoot($path="")
+		public static function getRoot()
 		{
-			return __DIR__ . $path;
+			return $_SERVER['DOCUMENT_ROOT'];
 		}
 
-		public static function getThis()
-		{
-			return 1;
-		}
+		
 
 
 	}

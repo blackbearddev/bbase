@@ -6,13 +6,12 @@
  * Time: 08:43
  */
 namespace Bbase\DB;
-
 class Sql {
-
-    const HOSTNAME = '127.0.0.1';
-    const USERNAME = 'root';
-    const PASSWORD = 'taty1988';
-    const DBNAME = 'sistema';
+    
+    const HOSTNAME = HOSTNAME;
+    const USERNAME = USERNAME;
+    const PASSWORD = PASSWORD;
+    const DBNAME = DBNAME;
 
     private $conn;
     
